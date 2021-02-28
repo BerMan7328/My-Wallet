@@ -28,8 +28,8 @@ interface IData {
 
 const List: React.FC<IRouteParams> = ({ match }) => {
     const [data, setData] = useState<IData[]>([]);
-    const [monthSelected, setMonthSelected] = useState<string>('');
-    const [yearSelected, setYearSelected] = useState<string>('');
+    const [monthSelected, setMonthSelected] = useState<string>(String(new Date().getMonth() + 1));
+    const [yearSelected, setYearSelected] = useState<string>(String(new Date().getFullYear));
     const { type } = match.params;
     const title = useMemo(() => {
         return type === 'entry-balance' ? 'Entradas' : 'Saídas'
@@ -71,8 +71,8 @@ const List: React.FC<IRouteParams> = ({ match }) => {
     return (
         <Container>
             <ContentHeader title={title} lineColor={lineColor}>
-                <SelectInput  options={months} onChange={(e) => setMonthSelected(e.target.value)}/>
-                <SelectInput  options={years} onChange={(e) => setYearSelected(e.target.value)}/>
+                <SelectInput  options={months} onChange={(e) => setMonthSelected(e.target.value)} defaultValue={monthSelected}/>
+                <SelectInput  options={years} onChange={(e) => setYearSelected(e.target.value)}defaultValue={yearSelected}/>
             </ ContentHeader>
 
             <Filters>
