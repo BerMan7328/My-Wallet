@@ -64,7 +64,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                  label: year,
              }
          });
-     },[])
+     },[listData])
 
     useEffect (() => {
        const filteredDate = listData.filter(item => {
