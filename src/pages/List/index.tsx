@@ -24,7 +24,11 @@ interface IData {
 }
 
 const List: React.FC<IRouteParams> = ({ match }) => {
+<<<<<<< HEAD
    // const [data, setData] = useState<IData>([]);
+=======
+    const [data, setData] = useState<IData>([]);
+>>>>>>> 1ae50f54225a7feaf87cbcf3e8d89d1d2a1eac2a
     const { type } = match.params;
     const title = useMemo(() => {
         return type === 'entry-balance' ? 'Entradas' : 'Saídas'
@@ -34,10 +38,13 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         return type === 'entry-balance' ? '#F7931B' : '#E44C4E'
     }, [type]);
 
+<<<<<<< HEAD
     const listData = useMemo(() => {
         return type === 'entry-balance' ?  gains : expenses;
     },[type]);
 
+=======
+>>>>>>> 1ae50f54225a7feaf87cbcf3e8d89d1d2a1eac2a
     const months = [
         {value: 2, label: 'Fevereiro'},
         {value: 3, label: 'Março'},
@@ -50,8 +57,13 @@ const List: React.FC<IRouteParams> = ({ match }) => {
     ];
 
     useEffect (() => {
+<<<<<<< HEAD
         console.log(listData)
     },[]);
+=======
+        const 
+    },[];)
+>>>>>>> 1ae50f54225a7feaf87cbcf3e8d89d1d2a1eac2a
 
     return (
         <Container>
