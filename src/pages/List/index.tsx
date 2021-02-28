@@ -63,7 +63,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
        });
        const formattedData = filteredDate.map(item => {
             return {
-                id: String(Math.random () * data.length),
+                id: String(new Date().getTime()) + item.amount,
                 description: item.description,
                 amountFormatted: formatCurrency(Number(item.amount)),
                 frequency: item.frequency,
@@ -72,7 +72,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
             }
         });
         setData(formattedData)
-    },[]);
+    },[listData, monthSelected, yearSelected, data.length]);
 
     return (
         <Container>
