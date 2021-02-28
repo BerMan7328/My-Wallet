@@ -1,4 +1,5 @@
 import React , {useMemo, useState, useEffect} from 'react';
+import {} from 'uuid';
 import {Container, Content, Filters } from './styles';
 import ContentHeader from '../../components/ContentHeader';
 import SelectInput from '../../components/SelectInput';
@@ -7,6 +8,7 @@ import gains from '../../repositories/gains';
 import expenses from '../../repositories/expenses';
 import formatCurrency from '../../utils/formatCurrency';
 import formatDate from '../../utils/formatDate';
+import listOfMonths from '../../utils/months';
 
 interface IRouteParams {
     match: {
@@ -43,12 +45,6 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         return type === 'entry-balance' ?  gains : expenses;
     },[type]);
 
-    const months = [
-        {value: 2, label: 'Fevereiro'},
-        {value: 3, label: 'Março'},
-        {value: 4, label: 'Abril'},
-    ];
-
      const years = useMemo(() => {
          let uniqueYears: number[] = [];
          listData.forEach(item => {
@@ -65,6 +61,15 @@ const List: React.FC<IRouteParams> = ({ match }) => {
              }
          });
      },[listData])
+
+     const months = useMemo(() => {
+        return listOfMonths.map((month, index) => {
+            return {
+                value: index + 1,
+                label: month,
+            }
+        });
+        },[listData]);
 
     useEffect (() => {
        const filteredDate = listData.filter(item => {
