@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div``;
-export const Content = styled.div``;
+export const Content = styled.main``;
 export const Filters = styled.div`
     width: 100%;
     display: flex;
@@ -49,5 +49,4 @@ export const Filters = styled.div`
     .tag-actived {
         opacity: 1;
     }
-
 `;
