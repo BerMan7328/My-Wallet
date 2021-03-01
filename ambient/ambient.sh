@@ -47,6 +47,6 @@ git pull https://github.com/BerMan7328/My-Wallet.git master &&
 cd /tmp/git/ambient &&
 docker-compose up -d &&
 
-rm -rf /tmp/My-Wallet &&
+rm -rf /tmp/git &&
 
 echo "ambiente finalizado, containers ativos"
