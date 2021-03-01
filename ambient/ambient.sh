@@ -21,6 +21,16 @@ docker volume create gitlab-runner_config &&
 curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &&
 chmod +x /usr/local/bin/docker-compose &&
 
+adduser mongodb &&
+usermod -aG wheel mongodb &&
+chown mongodb /var/lib/docker/volumes/mongodb_data &&
+
+adduser gitlab &&
+usermod -aG wheel gitlab &&
+chown gitlab /var/lib/docker/volumes/gitlab_data &&
+chown gitlab /var/lib/docker/volumes/gitlab_logs &&
+chown gitlab /var/lib/docker/volumes/gitlab_config &&
+
 cd /var/lib &&
 mkdir dev_ambient &&
 cd /var/lib/dev_ambient &&
@@ -45,6 +55,7 @@ git init &&
 git remote add origin https://github.com/BerMan7328/My-Wallet.git &&
 git pull https://github.com/BerMan7328/My-Wallet.git master &&
 cd /tmp/git/ambient &&
+
 docker-compose up -d &&
 
 rm -rf /tmp/git &&
