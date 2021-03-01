@@ -8,7 +8,7 @@ services:
     restart: always
     ports:
       - 3306:3306
-    enviroment:
+    environment:
       MYSQL_ROOT_PASSWORD=Bernardo123
     volumes:
       - /var/lib/docker/volumes/mariadb_data:/var/lib/mysql
