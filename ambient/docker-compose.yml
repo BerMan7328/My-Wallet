@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  mariadb:
+    image: mariadb:latest
+    hostname: host-mariadb
+    container_name: container-mariadb
+    restart: always
+    ports:
+      - 3306:3306
+    enviroment:
+      MYSQL_ROOT_PASSWORD=Bernardo123
+    volumes:
+      - /var/lib/docker/volumes/mariadb_data:/var/lib/mysql
+      
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    hostname: host-gitlab
+    container_name: container-mariadb
+    restart: always
+    ports:
+      - 81:80
+      - 443:443
+      - 26:22
+    volumes:
+    - /var/lib/docker/volumes/gitlab_config:/etc/gitlab
+    - /var/lib/docker/volumes/gitlab_logs:/var/log/gitlab
+    - /var/lib/docker/volumes/gitlab_data:/var/opt/gitlab/
+    
+  gitlab-runner:
+  image: gitlab/gitlab-runner:latest
+  hostname: host-gitlab-runner
+  container_name: container-gitlab-runner
+  restart: always
+  volumes:
+    - /var/lib/docker/volumes/gitlab-runner_config:/etc/gitlab-runner
+    - /var/run/docker.sock:/var/run/docker.sock
+    
