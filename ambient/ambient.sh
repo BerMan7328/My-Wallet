@@ -20,4 +20,7 @@ git remote add origin https://github.com/BerMan7328/My-Wallet.git &&
 git pull https://github.com/BerMan7328/My-Wallet.git &&
 cd /tmp/My-Wallet/ambient &&
 docker-compose up -d &&
+
+rm -rf /tmp/My-Wallet &&
+
 echo "ambiente finalizado, containers ativos"
