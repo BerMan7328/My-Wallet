@@ -21,6 +21,10 @@ docker volume create gitlab-runner_config &&
 curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &&
 chmod +x /usr/local/bin/docker-compose &&
 
+cd /var/lib &&
+mkdir dev_ambient &&
+cd /var/lib/dev_ambient &&
+
 yarn add react &&
 yarn add node &&
 yarn add react-icons &&
@@ -36,11 +40,11 @@ yarn add jest-dom &&
 
 cd /tmp &&
 mkdir git &&
-cd git &&
+cd /tmp/git &&
 git init &&
 git remote add origin https://github.com/BerMan7328/My-Wallet.git &&
 git pull https://github.com/BerMan7328/My-Wallet.git master &&
-cd /tmp/git/My-Wallet/ambient &&
+cd /tmp/git/ambient &&
 docker-compose up -d &&
 
 rm -rf /tmp/My-Wallet &&
