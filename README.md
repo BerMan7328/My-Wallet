@@ -1,5 +1,7 @@
 Software criado utilizando NodeJS e React.
+
 Gerenciador de pacotes utilizado: yarn
+
 bibliotecas:
 - React Router Dom
 - uuidv4
