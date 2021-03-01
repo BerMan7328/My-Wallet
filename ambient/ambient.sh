@@ -2,6 +2,11 @@
 yum update -y &&
 yum install -y docker &&
 yum install -y git &&
+yum install -y curl &&
+curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash - &&
+sudo yum install -y nodejs &&
+curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo &&
+rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg &&
 yum install -y yarn &&
 
 systemctl start docker &&
@@ -30,10 +35,12 @@ yarn add user-event &&
 yarn add jest-dom &&
 
 cd /tmp &&
+mkdir git &&
+cd git &&
 git init &&
 git remote add origin https://github.com/BerMan7328/My-Wallet.git &&
-git pull https://github.com/BerMan7328/My-Wallet.git &&
-cd /tmp/My-Wallet/ambient &&
+git pull https://github.com/BerMan7328/My-Wallet.git master &&
+cd /tmp/git/My-Wallet/ambient &&
 docker-compose up -d &&
 
 rm -rf /tmp/My-Wallet &&
