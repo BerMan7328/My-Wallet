@@ -4,6 +4,10 @@ Gerenciador de pacotes utilizado: yarn
 
 bibliotecas:
 - React Router Dom
+- React Icons
+- Styled Components
+- React Scripts
+- React Switch
 - uuidv4
 
 Fonte: Roboto
