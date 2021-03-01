@@ -1,17 +1,18 @@
 version: "3"
 
 services:
-  mariadb:
-    image: mariadb:latest
-    hostname: host-mariadb
-    container_name: container-mariadb
+  mongodb:
+    image: mongo:latest
+    hostname: host-mongodb
+    container_name: container-mongodb
     restart: always
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: Bernardo123
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Bernardo123
     volumes:
-      - /var/lib/docker/volumes/mariadb_data:/var/lib/mysql
+      - /var/lib/docker/volumes/mongodb_data:/data/db
       
   gitlab:
     image: gitlab/gitlab-ce:latest
