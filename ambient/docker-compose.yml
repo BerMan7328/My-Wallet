@@ -28,11 +28,11 @@ services:
     - /var/lib/docker/volumes/gitlab_data:/var/opt/gitlab/
     
   gitlab-runner:
-  image: gitlab/gitlab-runner:latest
-  hostname: host-gitlab-runner
-  container_name: container-gitlab-runner
-  restart: always
-  volumes:
-    - /var/lib/docker/volumes/gitlab-runner_config:/etc/gitlab-runner
-    - /var/run/docker.sock:/var/run/docker.sock
+    image: gitlab/gitlab-runner:latest
+    hostname: host-gitlab-runner
+    container_name: container-gitlab-runner
+    restart: always
+    volumes:
+      - /var/lib/docker/volumes/gitlab-runner_config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
     
