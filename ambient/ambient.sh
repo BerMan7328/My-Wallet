@@ -23,7 +23,7 @@ chmod +x /usr/local/bin/docker-compose &&
 
 yarn add react &&
 yarn add node &&
-yarn add react-icons/md &&
+yarn add react-icons &&
 yarn add styled-components &&
 yarn add react-dom &&
 yarn add react-router-dom &&
