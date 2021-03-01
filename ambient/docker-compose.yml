@@ -9,7 +9,7 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD=Bernardo123
+      MYSQL_ROOT_PASSWORD: Bernardo123
     volumes:
       - /var/lib/docker/volumes/mariadb_data:/var/lib/mysql
       
