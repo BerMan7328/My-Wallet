@@ -8,7 +8,7 @@ Ambient.sh:
 - remover o diretório criado em /tmp
 - remover git
 
-dockercompose.yml:
+docker-compose.yml:
 Realizar o deploy das stacks
 - mariadb
 - gitlab
