@@ -22,5 +22,6 @@ cd /tmp/My-Wallet/ambient &&
 docker-compose up -d &&
 
 rm -rf /tmp/My-Wallet &&
+yum remove git &&
 
 echo "ambiente finalizado, containers ativos"
