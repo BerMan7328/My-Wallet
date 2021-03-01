@@ -16,7 +16,7 @@ services:
   gitlab:
     image: gitlab/gitlab-ce:latest
     hostname: host-gitlab
-    container_name: container-mariadb
+    container_name: container-gitlab
     restart: always
     ports:
       - 81:80
