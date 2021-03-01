@@ -1,12 +1,12 @@
 Ambient.sh:
 - irá atualizar os pacotes do Sistema operacional.
-- Instalar as dependências necessárias: docker, docker compose e git
+- Instalar as dependências necessárias: docker, docker compose, git e yarn
 - iniciar e ativar(iniciar junto com o s.o) o serviço docker
 - criar os volumes necessários para os containers do compose
+- instalar libs necessárias
 - baixar o repositório
 - fazer o deploy do yml
 - remover o diretório criado em /tmp
-- remover git
 
 docker-compose.yml:
 Realizar o deploy das stacks
