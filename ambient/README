@@ -5,8 +5,8 @@ Ambient.sh:
 - criar os volumes necessários para os containers do compose
 - instalar bibliotecas necessárias
 - baixar o repositório
-- fazer o deploy do yml
-- remover o diretório criado em /tmp
+- desativar selinux
+- reiniciar o host
 
 docker-compose.yml:
 Realizar o deploy das stacks
