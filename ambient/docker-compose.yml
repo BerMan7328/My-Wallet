@@ -38,7 +38,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       
   portainer:
-        image: portainer/portainer
+        image: portainer/portainer:latest
         hostname: host-portainer
         container_name: container-portainer
         restart: always
