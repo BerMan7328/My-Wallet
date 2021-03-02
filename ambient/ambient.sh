@@ -17,6 +17,7 @@ docker volume create gitlab_data &&
 docker volume create gitlab_logs &&
 docker volume create gitlab_config &&
 docker volume create gitlab-runner_config &&
+docker volume create portainer_data &&
 
 curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &&
 chmod +x /usr/local/bin/docker-compose &&
