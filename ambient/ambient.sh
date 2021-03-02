@@ -22,7 +22,8 @@ curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compo
 chmod +x /usr/local/bin/docker-compose &&
 
 sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config &&
-set enforce 0 &&
+sudo systemctl stop firewalld &&
+sudo systemctl disable firewalld &&
 
 cd /var/lib &&
 mkdir dev_ambient &&
