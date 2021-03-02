@@ -41,11 +41,11 @@ services:
         image: portainer/portainer
         hostname: host-portainer
         container_name: container-portainer
+        restart: always
+        command: -H unix:///var/run/docker.sock
         ports:
             - 8000:8000
             - 9000:9000
-        restart: always
         volumes:
             - /var/lib/docker/volumes/portainer_data/:/data
             - /var/run/docker.sock/:/var/run/docker.sock
-        command: -H unix:///var/run/docker.sock 
