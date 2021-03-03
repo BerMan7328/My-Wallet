@@ -23,8 +23,6 @@ docker volume create portainer_data &&
 docker volume create netdata_sys &&
 docker volume create netdata_proc &&
 
-chmod +x /usr/local/bin/docker-compose &&
-
 sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config &&
 sudo systemctl stop firewalld &&
 sudo systemctl disable firewalld &&
@@ -53,5 +51,10 @@ git init &&
 git remote add origin https://github.com/BerMan7328/My-Wallet.git &&
 git pull https://github.com/BerMan7328/My-Wallet.git master &&
 cd /tmp/git/ambient &&
+
+mv /tmp/git /var/lib/dev_ambient &&
+cd /var/lib/dev_ambient &&
+yarn add react-scripts &&
+npx create-react-app mywallet --template typescript &&
 
 reboot
