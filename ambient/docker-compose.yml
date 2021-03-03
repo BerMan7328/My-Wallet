@@ -20,13 +20,13 @@ services:
     container_name: container-gitlab
     restart: always
     ports:
-      - 81:80
+      - 80:80
       - 443:443
       - 26:22
     volumes:
       - /var/lib/docker/volumes/gitlab_config:/etc/gitlab
       - /var/lib/docker/volumes/gitlab_logs:/var/log/gitlab
-      - /var/lib/docker/volumes/gitlab_data:/var/opt/gitlab/
+      - /var/lib/docker/volumes/gitlab_data:/var/opt/gitlab
     
   gitlab-runner:
     image: gitlab/gitlab-runner:latest
