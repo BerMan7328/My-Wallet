@@ -1,9 +1,10 @@
 #!/bin/bash
 
 yum update -y &&
-yum install -y docker &&
-yum install -y git &&
-yum install -y curl &&
+yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &&
+yum install -y yum-utils device-mapper-persistent-data lvm2 &&
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo &&
+yum install -y docker docker-compose git curl &&
 curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash - &&
 sudo yum install -y nodejs &&
 curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo &&
@@ -22,7 +23,6 @@ docker volume create portainer_data &&
 docker volume create netdata_sys &&
 docker volume create netdata_proc &&
 
-curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &&
 chmod +x /usr/local/bin/docker-compose &&
 
 sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config &&
