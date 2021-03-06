@@ -1,0 +1,19 @@
+Ambient.sh:
+- irá atualizar os pacotes do Sistema operacional.
+- Instalar as dependências necessárias: docker, docker compose, git e yarn
+- iniciar e ativar(iniciar junto com o s.o) o serviço docker
+- criar os volumes necessários para os containers do compose
+- instalar bibliotecas necessárias
+- baixar o repositório
+- desativar selinux
+- reiniciar o host
+
+docker-compose.yml:
+Realizar o deploy das stacks
+- mariadb
+- gitlab
+- gitlab-runner
+
+Antes de rodar o compose na Máquina criada, atente-se em rodar o.sh para preparar o ambiente para o mesmo.
+Download ISO Centos 7 2009 Minimal: http://centos.ufes.br/7.9.2009/isos/x86_64/CentOS-7-x86_64-Minimal-2009.iso
+Após a instalação do S.O, executar o ambient.sh

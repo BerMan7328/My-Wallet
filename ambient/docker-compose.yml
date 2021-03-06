@@ -1,0 +1,68 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:latest
+    hostname: host-mysql
+    container_name: container-mysql
+    restart: always
+    ports:
+        - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: Bernardo123
+    volumes:
+      - /var/lib/docker/volumes/mysql_data/:/var/lib/mysql
+
+      
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    hostname: host-gitlab
+    container_name: container-gitlab
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+      - 26:22
+    volumes:
+      - /var/lib/docker/volumes/gitlab_config:/etc/gitlab
+      - /var/lib/docker/volumes/gitlab_logs:/var/log/gitlab
+      - /var/lib/docker/volumes/gitlab_data:/var/opt/gitlab
+    
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    hostname: host-gitlab-runner
+    container_name: container-gitlab-runner
+    restart: always
+    volumes:
+      - /var/lib/docker/volumes/gitlab-runner_config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+  portainer:
+        image: portainer/portainer:latest
+        hostname: host-portainer
+        container_name: container-portainer
+        restart: always
+        command: -H unix:///var/run/docker.sock
+        ports:
+            - 8000:8000
+            - 9000:9000
+        volumes:
+            - /var/lib/docker/volumes/portainer_data/:/data
+            - /var/run/docker.sock/:/var/run/docker.sock
+   
+  netdata:
+        image: netdata/netdata
+        hostname: host-netdata
+        container_name: container-netdata
+        ports:
+            - 19999:19999
+        restart: always
+        cap_add:
+            - SYS_PTRACE
+        security_opt:
+            - apparmor:unconfined
+        volumes:
+            - /var/lib/docker/volumes/netdata_proc/:/host/proc:ro
+            - /var/lib/docker/volumes/netdata_sys/:/host/sys:ro
+            - /var/run/docker.sock/:/var/run/docker.sock:ro
+ 
