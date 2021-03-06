@@ -39,7 +39,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         return movimentType === 'entry-balance' ?
             {
                 title: 'Entradas',
-                lineColor: '#F7931B',
+                lineColor: '#4E41F0',
                 data: gains
             }
             :
@@ -66,7 +66,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
                  label: year,
              }
          });
-     },[pageData])
+     },[pageData]);
 
      const months = useMemo(() => {
         return listOfMonths.map((month, index) => {
@@ -80,7 +80,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         const handleFrequencyClick = (frequency: string) => {
             const alreadySelected = frequencyFilterSelected.findIndex(item => item === frequency);
             if(alreadySelected >= 0){
-                const filtered = frequencyFilterSelected.filter(item => item != frequency);
+                const filtered = frequencyFilterSelected.filter(item => item !== frequency);
                 setFrequencyFilterSelected(filtered);
             }else{
                 setFrequencyFilterSelected((prev) => [...prev, frequency]);
@@ -109,20 +109,20 @@ const List: React.FC<IRouteParams> = ({ match }) => {
 
     useEffect (() => {
        const { data } = pageData;
-       const filteredDate = data.filter(item => {
+       const filteredData = data.filter(item => {
             const date = new Date(item.date);
             const month = date.getMonth() + 1;
             const year = date.getFullYear();
             return month === monthSelected && year === yearSelected && frequencyFilterSelected.includes(item.frequency);
        });
-       const formattedData = filteredDate.map(item => {
+       const formattedData = filteredData.map(item => {
             return {
                 id: uuid(),
                 description: item.description,
                 amountFormatted: formatCurrency(Number(item.amount)),
                 frequency: item.frequency,
                 dateFormatted: formatDate(item.date),
-                tagColor: item.frequency === 'recorrente' ? '#4E41F0' : '#E44C4E'
+                tagColor: item.frequency === 'recorrente' ? '#4E41F0' : '#E44C4E',
             }
         });
         setData(formattedData)
