@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS `resenhai_db`.`finance` (
+  `id` FLOAT NOT NULL,
+  `expenses` FLOAT NULL,
+  `gains` FLOAT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE IF NOT EXISTS `resenhai_db`.`user` (
+  `id` FLOAT NOT NULL,
+  `username` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NULL,
+  `password` VARCHAR(32) NOT NULL,
+  `status` TINYINT NULL,
+  PRIMARY KEY (`id`)
+  ;
