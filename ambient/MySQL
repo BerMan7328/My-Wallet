@@ -1,3 +1,4 @@
+CREATE DATADABESE `mywallet`;
 USE mywallet;
 GO
 CREATE TABLE IF NOT EXISTS `mywallet`.`finance` (
