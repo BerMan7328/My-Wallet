@@ -3,7 +3,7 @@ export default {
 
     colors: {
         primary: '#DCDCDC',
-        secondary: '#FFF',
+        secondary: '#FFFFFF',
         tertiary: '#F5F5F5',
 
         white: '#000',
@@ -12,6 +12,6 @@ export default {
 
         success: '#03BB85',
         info: '#3B5998',
-        warning: '#FF6969',
+        warning: '#FF6961',
     },
 };
