@@ -14,7 +14,7 @@ yum install -y yarn &&
 systemctl start docker &&
 systemctl enable docker &&
 
-docker volume create mysql_mongodb &&
+docker volume create mysql_data &&
 docker volume create gitlab_data &&
 docker volume create gitlab_logs &&
 docker volume create gitlab_config &&
