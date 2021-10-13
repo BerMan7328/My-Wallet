@@ -1,0 +1,127 @@
+---
+
+#Installing packages
+- name: Updating Packages O.S
+  shell: yum update -y
+
+- name: Add EPEL repo
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    baseurl: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+- name: Add docker repo
+  shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+- name: Install nodesource
+  shell: curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
+
+- name: Install yarn repo
+  shell: curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+
+- name: Import pubkey.gpg
+  shell: rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
+
+- name: Instalação Pacotes Necessários
+  shell: yum install -y git docker docker-compose openssl setroubleshoot setools curl nodejs yarn
+  notify: Start docker
+
+#Creating Groups
+- name: Creating developers group
+  group:
+    name: "{{ user_developers }}"
+    state: present
+
+- name: Creating Devops group
+  group:
+    name: "{{ user_devops }}"
+    state: present 
+
+#Creating Users
+- name: creating developers user
+  user: 
+    name: "{{ user_developers | password_hash("sha512") }}"
+    password: "{{ passwd_developers }}"
+    comment: user for developers
+    groups:
+      - "{{ user_developers }}"
+      - wheel
+
+- name: creating devops user
+  user:
+    name: "{{ user_devops }}"
+    password: "{{ passwd_devops | password_hash("sha512") }}"
+    comment: user for devops
+    groups:
+      - "{{ user_devops }}"
+      - wheel
+
+#Conf SELinux
+- name: Change SELINUX to permissive
+  shell: sed -i 's/enforcing/permissive/g' /etc/selinux/config /etc/selinux/config
+
+- name: enforcing 0 selinux
+  shell: setenforce 0
+
+#Open Firewall Ports
+- name: Open aplication port
+  shell: firewall-cmd --zone=public --add-port={{ Aplication_port }}/tcp
+
+- name: Open Netdata port
+  shell: firewall-cmd --zone=public --add-port={{ Netdata_port }}/tcp
+
+- name: Open DB port tcp 
+  shell: firewall-cmd --zone=public --add-port={{ DB_port }}/tcp
+
+- name: Open DB port udp 
+  shell: firewall-cmd --zone=public --add-port={{ DB_port }}/udp
+  notify: Restart Firewall
+
+#creating dev_ambient
+- name: Create dev_ambient
+  shell: mkdir {{ dev_ambient }}
+
+- name: add yarn packages
+  yarn:
+    name:   
+      - react
+      - node
+      - react-icons
+      - styled-components
+      - react-dom
+      - react-router-dom
+      - react-scripts
+      - react-switch
+      - typescript
+      - uuidv4
+      - user-event
+      - jest-dom
+    path: "{{ dev_ambient }}"
+
+#creating git_tmp
+- name: creating temp dir
+  shell: mkdir {{ git_tmp }}
+
+#Clone repo
+- name: Clone repo
+  git:
+    repo: "{{ My-Wallet-repo }}"
+    dest: "{{ git_tmp }}"
+    clone: yes
+    update: yes
+
+#Create definiteve directories for files
+- name: creating container dir
+  shell: mkdir -p {{ container_dir }}
+
+- name: move dev files   
+  shell: mv {{ git_tmp }}/{{ project_name }}//{.env, docker-compose.yml} {{ container_dir }}
+
+- name: move files for definitive directory   
+  shell: mv {{ git_tmp }}/{{ project_name }} {{ container_dir }}
+
+- name: crating react template
+  shell: cd {{ dev_ambient }} && npx create-react-app mywallet --template typescript
+
+- name: removing git_tmp
+  shell: rm -rf {{ git_tmp }}

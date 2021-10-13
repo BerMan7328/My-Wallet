@@ -1,0 +1,10 @@
+- name: Start docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Restart Firewall
+  systemd:
+    name: firewalld
+    state: restarted

@@ -1,0 +1,10 @@
+#Recommend to use ansible-vaul to encrypt sensitive data 
+#in this case it will be open for stack understanding purposes. 
+
+user_developers: user.developer
+user_devops: user.devops
+passwd_developers: changeme
+passwd_devops: changeme
+Aplication_port: 5000
+Netdata_port: 19999
+DB_port: 3306

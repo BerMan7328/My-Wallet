@@ -1,0 +1,5 @@
+git_tmp: /tmp/git_tmp
+container_dir: /var/container/My-Wallet
+dev_ambient: /var/lib/dev_ambient
+My-Wallet-repo: https://github.com/BerMan7328/My-Wallet.git
+project_name: My-Wallet
