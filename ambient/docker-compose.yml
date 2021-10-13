@@ -1,5 +1,14 @@
 version: "3"
 services:
+  mywallet:
+    image: mywallet
+    container_name: mywallet
+    restart: on-failure
+    ports: 
+      - 5000:5000
+    networks:
+      - mywallet_net
+
   mysql:
     image: mysql
     hostname: mysql
@@ -13,6 +22,8 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - mysql_log:/var/log/mysql
+    networks:
+      - mywallet_net
 
   netdata:
     image: netdata/netdata
