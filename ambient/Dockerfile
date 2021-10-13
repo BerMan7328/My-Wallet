@@ -9,9 +9,6 @@ RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum
 RUN rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
 RUN yum install -y yarn
 
-RUN groupadd -g 1000 mywallet && adduser -c "mywallet" -u 1000 -g mywallet mywallet && usermod -aG wheel mywallet
-USER mywallet
-
 RUN mkdir /app
 WORKDIR /app
 
@@ -23,8 +20,11 @@ COPY package.json ./
 COPY tsconfig.json ./
 COPY yarn.lock ./
 
+RUN npm install --silent
+RUN npm install react-scripts@3.4.1 -g --silent
+
 COPY . ./
 
-EXPOSE 5000
+EXPOSE 3000
 
 CMD ["npm", "start"]
