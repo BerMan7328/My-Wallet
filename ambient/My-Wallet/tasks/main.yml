@@ -13,14 +13,6 @@
 - name: Add docker repo
   shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-- name: Install nodesource
-  shell: curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
-
-- name: Install yarn repo
-  shell: curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
-
-- name: Import pubkey.gpg
-  shell: rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
 
 - name: Instalação Pacotes Necessários
   shell: yum install -y git docker docker-compose openssl setroubleshoot setools curl nodejs yarn
@@ -77,27 +69,6 @@
   shell: firewall-cmd --zone=public --add-port={{ DB_port }}/udp
   notify: Restart Firewall
 
-#creating dev_ambient
-- name: Create dev_ambient
-  shell: mkdir {{ dev_ambient }}
-
-- name: add yarn packages
-  yarn:
-    name:   
-      - react
-      - node
-      - react-icons
-      - styled-components
-      - react-dom
-      - react-router-dom
-      - react-scripts
-      - react-switch
-      - typescript
-      - uuidv4
-      - user-event
-      - jest-dom
-    path: "{{ dev_ambient }}"
-
 #creating git_tmp
 - name: creating temp dir
   shell: mkdir {{ git_tmp }}
@@ -117,11 +88,7 @@
 - name: move dev files   
   shell: mv {{ git_tmp }}/{{ project_name }}//{.env, docker-compose.yml} {{ container_dir }}
 
-- name: move files for definitive directory   
-  shell: mv {{ git_tmp }}/{{ project_name }} {{ container_dir }}
-
-- name: crating react template
-  shell: cd {{ dev_ambient }} && npx create-react-app mywallet --template typescript
-
 - name: removing git_tmp
   shell: rm -rf {{ git_tmp }}
+
+...

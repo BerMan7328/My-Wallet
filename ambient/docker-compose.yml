@@ -1,32 +1,43 @@
 version: "3"
-
 services:
   mysql:
-    image: mysql:latest
-    hostname: host-mysql
-    container_name: container-mysql
+    image: mysql
+    hostname: mysql
+    container_name: mysql
     restart: always
     ports:
-        - 3306:3306
+      - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: Bernardo123
+      MYSQL_ROOT_PASSWORD: changeme
       MYSQL_DATABASE: mywallet
     volumes:
-      - /var/lib/docker/volumes/mysql_data/:/var/lib/mysql
-   
+      - mysql_data:/var/lib/mysql
+      - mysql_log:/var/log/mysql
+
   netdata:
-        image: netdata/netdata
-        hostname: host-netdata
-        container_name: container-netdata
-        ports:
-            - 19999:19999
-        restart: always
-        cap_add:
-            - SYS_PTRACE
-        security_opt:
-            - apparmor:unconfined
-        volumes:
-            - /var/lib/docker/volumes/netdata_proc/:/host/proc:ro
-            - /var/lib/docker/volumes/netdata_sys/:/host/sys:ro
-            - /var/run/docker.sock/:/var/run/docker.sock:ro
- 
+    image: netdata/netdata
+    hostname: host-netdata
+    container_name: container-netdata
+    ports:
+      - 19999:19999
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - netdata_proc:/host/proc:ro
+      - netdata_sys:/host/sys:ro
+      - /var/run/docker.sock/:/var/run/docker.sock:ro
+    networks:
+      - mywallet_net
+
+volumes:
+  mysql_data: {}
+  mysql_log: {}
+  netdata_proc: {}
+  netdata_sys: {}
+
+networks:
+  mywallet_net:
+    driver: bridge
